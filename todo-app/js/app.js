@@ -39,9 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             todoItem.innerHTML = `
                 <input type="checkbox" class="checkbox" ${todo.completed ? 'checked' : ''}>
-                <div class="todo-title">${todo.title}</div>
-                <div class="todo-body">${todo.body}</div>
+                <div class="todo-title" contenteditable="false">${todo.title}</div>
+                <div class="todo-body" contenteditable="false">${todo.body}</div>
                 <div>
+                    <button class="edit-btn">Edit</button>
                     <button class="delete-btn">Delete</button>
                 </div>
             `;
@@ -54,6 +55,28 @@ document.addEventListener('DOMContentLoaded', () => {
             todoItem.querySelector('.delete-btn').addEventListener('click', () => {
                 todos.splice(index, 1);
                 renderTodos();
+            });
+
+            const editBtn = todoItem.querySelector('.edit-btn');
+            const titleElement = todoItem.querySelector('.todo-title');
+            const bodyElement = todoItem.querySelector('.todo-body');
+
+            editBtn.addEventListener('click', () => {
+                if (editBtn.textContent === 'Edit') {
+                    titleElement.contentEditable = true;
+                    bodyElement.contentEditable = true;
+                    todoItem.classList.add('editing');
+                    editBtn.textContent = 'Save';
+                } else {
+                    titleElement.contentEditable = false;
+                    bodyElement.contentEditable = false;
+                    todoItem.classList.remove('editing');
+                    editBtn.textContent = 'Edit';
+
+                    todo.title = titleElement.textContent.trim();
+                    todo.body = bodyElement.textContent.trim();
+                    renderTodos();
+                }
             });
 
             todoList.appendChild(todoItem);
