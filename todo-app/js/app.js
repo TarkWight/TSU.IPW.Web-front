@@ -19,12 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     todoForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const newTodoText = document.getElementById('new-todo').value.trim();
-        if (newTodoText) {
-            const newTodo = { text: newTodoText, completed: false };
+        const newTodoTitle = document.getElementById('new-todo-title').value.trim();
+        const newTodoBody = document.getElementById('new-todo-body').value.trim();
+
+        if (newTodoTitle && newTodoBody) {
+            const newTodo = { title: newTodoTitle, body: newTodoBody, completed: false };
             todos.push(newTodo);
             renderTodos();
-            document.getElementById('new-todo').value = '';
+            document.getElementById('new-todo-title').value = '';
+            document.getElementById('new-todo-body').value = '';
         }
     });
 
@@ -36,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             todoItem.innerHTML = `
                 <input type="checkbox" class="checkbox" ${todo.completed ? 'checked' : ''}>
-                <span>${todo.text}</span>
+                <div class="todo-title">${todo.title}</div>
+                <div class="todo-body">${todo.body}</div>
                 <div>
                     <button class="delete-btn">Delete</button>
                 </div>

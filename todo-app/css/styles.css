@@ -53,6 +53,17 @@ li .checkbox {
     margin-right: 10px;
 }
 
+.todo-title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.todo-body {
+    font-style: italic;
+    color: #666;
+    margin-top: 5px;
+}
+
 button.edit-btn, button.delete-btn, button.toggle-btn {
     background-color: #007BFF;
     color: white;
