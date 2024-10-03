@@ -1,23 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TO-DO List</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Менеджер задач</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>TO-DO List</h1>
-<form id="todo-form">
-    <input type="text" id="new-todo-title" placeholder="Enter task title" required>
-    <textarea id="new-todo-body" placeholder="Enter task description" required></textarea>
-    <button type="submit">Add</button>
-</form>
-<p id="no-tasks-msg">Add a task</p>
-<ul id="todo-list"></ul>
-<button id="save-btn">Save List</button>
-<button id="load-btn">Load List</button>
+<header>
+    <h1>Менеджер задач</h1>
+    <nav>
+        <ol class="breadcrumbs">
+            <li><a href="#">Создать задачу</a></li>
+        </ol>
+    </nav>
+</header>
 
-<script src="js/app.js"></script>
+<main>
+    <section id="create-task-section">
+        <h2>Создать задачу</h2>
+        <form id="task-form">
+            <label for="task-title">Название задачи:</label>
+            <input type="text" id="task-title" required>
+
+            <label for="task-description">Описание (опционально):</label>
+            <textarea id="task-description"></textarea>
+
+            <label for="task-list">Выбор списка:</label>
+            <select id="task-list">
+                <!-- Динамически заполняемый список задач -->
+            </select>
+
+            <button type="submit" id="submit-button" data-action="create">Создать</button>
+        </form>
+    </section>
+
+    <section id="view-tasks-section">
+        <h2>Просмотр задач</h2>
+        <div id="task-lists">
+            <!-- Динамически заполняемый список задач -->
+        </div>
+    </section>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
