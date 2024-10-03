@@ -4,21 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const loadTasksButton = document.getElementById("load-tasks-button");
     let tasks = [];
 
-    // Функция для загрузки задач с сервера
     async function loadTasks() {
         try {
-            const response = await fetch('https://192.168.0.36:7088/api/Tasks'); // URL вашего API
+            const response = await fetch('https://192.168.0.36:7088/api/Tasks');
             if (!response.ok) {
                 throw new Error('Ошибка сети при загрузке задач');
             }
             tasks = await response.json();
-            displayTasks(); // Обновляем отображение после загрузки
+            displayTasks();
         } catch (error) {
             console.error('Ошибка загрузки задач:', error);
         }
     }
 
-    // Функция для отображения задач
     function displayTasks() {
         const taskLists = document.getElementById("task-lists");
         taskLists.innerHTML = ''; // Очистка списка перед отображением
@@ -32,25 +30,25 @@ document.addEventListener("DOMContentLoaded", function () {
             const taskDiv = document.createElement("div");
             taskDiv.className = "task";
 
-            // Иконка статуса (выполнено/не выполнено)
             const statusIcon = document.createElement("span");
             statusIcon.innerText = task.completed ? "✔️" : "❌";
             statusIcon.style.cursor = "pointer";
             statusIcon.onclick = () => toggleTaskStatus(index);
             taskDiv.appendChild(statusIcon);
 
-            // Название задачи
             const title = document.createElement("span");
-            title.innerText = task.title;
+            title.innerText = ` Название: ${task.title}`;
             taskDiv.appendChild(title);
 
-            // Кнопка редактирования
+            const description = document.createElement("p");
+            description.innerText = `Описание: ${task.description || 'Нет описания'}`;
+            taskDiv.appendChild(description);
+
             const editButton = document.createElement("button");
             editButton.innerText = "Редактировать";
             editButton.onclick = () => editTask(index);
             taskDiv.appendChild(editButton);
 
-            // Кнопка удаления
             const deleteButton = document.createElement("button");
             deleteButton.innerText = "Удалить";
             deleteButton.onclick = () => deleteTask(index);
@@ -60,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Функция для изменения статуса задачи
+
     async function toggleTaskStatus(index) {
         const task = tasks[index];
         const action = task.completed ? 'incomplete' : 'complete';
@@ -74,14 +72,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error('Ошибка сети при изменении статуса задачи');
             }
 
-            task.completed = !task.completed; // Обновляем локальный статус
-            displayTasks(); // Обновляем отображение задач
+            task.completed = !task.completed;
+            displayTasks();
         } catch (error) {
             console.error('Ошибка при изменении статуса задачи:', error);
         }
     }
 
-    // Функция для редактирования задачи
     function editTask(index) {
         const task = tasks[index];
         document.getElementById("task-title").value = task.title;
@@ -91,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
         submitButton.setAttribute("data-index", index);
     }
 
-    // Функция для добавления новой задачи или редактирования существующей
     taskForm.onsubmit = async function (event) {
         event.preventDefault();
         const title = document.getElementById("task-title").value;
@@ -115,8 +111,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 const createdTask = await response.json();
-                tasks.push(createdTask); // Добавляем созданную задачу в локальный список
-                displayTasks(); // Обновляем отображение
+                tasks.push(createdTask);
+                displayTasks();
             } catch (error) {
                 console.error('Ошибка при создании задачи:', error);
             }
@@ -143,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     throw new Error('Ошибка сети при редактировании задачи');
                 }
 
-                tasks[index] = updatedTask; // Обновляем задачу в локальном массиве
+                tasks[index] = updatedTask;
                 submitButton.innerText = "Создать";
                 submitButton.setAttribute("data-action", "create");
                 submitButton.removeAttribute("data-index");
@@ -153,31 +149,29 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        taskForm.reset(); // Сбрасываем форму
+        taskForm.reset();
     };
 
-    // Функция для удаления задачи
     async function deleteTask(index) {
         const taskId = tasks[index].id;
 
         try {
             const response = await fetch(`https://192.168.0.36:7088/api/Tasks/${taskId}`, {
-                method: 'DELETE' // Удаление задачи
+                method: 'DELETE'
             });
 
             if (!response.ok) {
                 throw new Error('Ошибка сети при удалении задачи');
             }
 
-            tasks.splice(index, 1); // Удаляем задачу из локального массива
-            displayTasks(); // Обновляем отображение
+            tasks.splice(index, 1);
+            displayTasks();
         } catch (error) {
             console.error('Ошибка при удалении задачи:', error);
         }
     }
 
-    // Загрузка задач при нажатии на кнопку
     loadTasksButton.addEventListener("click", loadTasks);
 
-    loadTasks(); // Изначальная загрузка задач с сервера при загрузке страницы
+    loadTasks();
 });
