@@ -26,17 +26,16 @@
             <label for="task-description">Описание (опционально):</label>
             <textarea id="task-description"></textarea>
 
-            <label for="task-list">Выбор списка:</label>
-            <select id="task-list">
-                <!-- Динамически заполняемый список задач -->
-            </select>
-
             <button type="submit" id="submit-button" data-action="create">Создать</button>
         </form>
     </section>
 
     <section id="view-tasks-section">
         <h2>Просмотр задач</h2>
+
+        <!-- Кнопка для подтягивания задач с сервера -->
+        <button id="load-tasks-button">Загрузить задачи с сервера</button>
+
         <div id="task-lists">
             <!-- Динамически заполняемый список задач -->
         </div>
