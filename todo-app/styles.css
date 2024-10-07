@@ -105,3 +105,61 @@ button:hover {
 .task button {
     margin-left: 5px;
 }
+.task {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+.task:hover {
+    background-color: #e7f3fe; /* Цвет при наведении */
+}
+
+.task-title {
+    margin: 0;
+    color: #333;
+}
+
+.task-description {
+    color: #666;
+}
+
+.tags-container {
+    margin-top: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    border-radius: 3px;
+    padding: 3px 8px;
+    margin: 0 5px 5px 0;
+    font-size: 0.9em;
+}
+
+button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+}
+
+.status-completed {
+    color: green; /* Цвет для завершенных задач */
+}
+
+.status-pending {
+    color: red; /* Цвет для незавершенных задач */
+}

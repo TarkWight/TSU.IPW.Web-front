@@ -10,8 +10,8 @@
 <header>
     <h1>Менеджер задач</h1>
     <nav>
-        <ol class="breadcrumbs">
-            <li><a href="#">Создать задачу</a></li>
+        <ol class="breadcrumbs" id="tags-list">
+            <!-- Здесь будут добавляться теги -->
         </ol>
     </nav>
 </header>
@@ -26,18 +26,64 @@
             <label for="task-description">Описание (опционально):</label>
             <textarea id="task-description"></textarea>
 
-            <button type="submit" id="submit-button" data-action="create">Создать</button>
+            <button type="submit" id="submit-button">Создать задачу</button>
         </form>
     </section>
 
     <section id="view-tasks-section">
         <h2>Просмотр задач</h2>
-
         <button id="load-tasks-button">Загрузить задачи с сервера</button>
-
         <div id="task-lists">
+            <!-- Список задач будет отображаться здесь -->
         </div>
     </section>
+
+    <section id="edit-task-section">
+        <h2>Редактировать задачу</h2>
+        <form id="edit-task-form">
+            <label for="edit-task-title">Название задачи:</label>
+            <input type="text" id="edit-task-title" required>
+
+            <label for="edit-task-description">Описание (опционально):</label>
+            <textarea id="edit-task-description"></textarea>
+
+            <button type="submit" id="update-task-button">Сохранить задачу</button>
+        </form>
+        <button id="delete-task-button">Удалить задачу</button>
+    </section>
+
+    <section id="add-tags-section">
+        <h2>Добавить теги к задаче</h2>
+        <p>Выберите задачу для добавления тегов:</p>
+        <ul id="task-select-list">
+            <!-- Список задач для выбора -->
+        </ul>
+
+        <div id="tag-buttons-container">
+            <!-- Кнопки тегов будут здесь -->
+        </div>
+
+        <button type="button" id="add-tags-button">Добавить теги</button>
+    </section>
+
+    <section id="create-tag-section">
+        <h2>Создать новый тег</h2>
+        <form id="tag-form">
+            <label for="tag-name">Название тега:</label>
+            <input type="text" id="tag-name" required>
+            <button type="submit" id="create-tag-button">Создать тег</button>
+        </form>
+    </section>
+
+    <section id="view-tags-section">
+        <h2>Все теги</h2>
+        <button id="load-tags-button">Загрузить теги с сервера</button>
+        <ul id="all-tags-list">
+            <!-- Здесь будут отображаться все теги -->
+        </ul>
+    </section>
+
+    <div id="notification" style="display:none;"></div>
 </main>
 
 <script src="script.js"></script>
